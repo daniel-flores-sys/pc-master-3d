@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es" data-palette="marfil" data-mode="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PC Master 3D</title>
+    <meta name="description" content="Curso guiado para estudiantes: aprende a mantener y reparar computadoras, laptops y celulares leyendo, viendo en 3D y practicando." />
+    <meta property="og:title" content="PC Master 3D" />
+    <meta property="og:description" content="Aprende mantenimiento de computadoras paso a paso: teoría breve, preguntas, práctica en 3D y examen final." />
+    <meta property="og:type" content="website" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='3' width='26' height='26' rx='6' fill='%231D4ED8'/%3E%3Crect x='10' y='10' width='12' height='12' rx='2' fill='none' stroke='white' stroke-width='2.5'/%3E%3Cpath d='M13 3v4M19 3v4M13 25v4M19 25v4M3 13h4M3 19h4M25 13h4M25 19h4' stroke='%231D4ED8' stroke-width='2'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400..700;1,400..700&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..600&display=swap" rel="stylesheet" />
+    <script>
+      // Aplica paleta y modo guardados antes del primer pintado (evita parpadeo).
+      (function () {
+        var root = document.documentElement;
+        var palettes = ['cobalto', 'indigo', 'marfil', 'arena'];
+        var palette = 'marfil';
+        var pref = 'system';
+        try {
+          var p = localStorage.getItem('pcm3d.palette');
+          var m = localStorage.getItem('pcm3d.mode');
+          if (p && palettes.indexOf(p) !== -1) palette = p;
+          if (m === 'light' || m === 'dark' || m === 'system') pref = m;
+        } catch (e) {}
+        var dark = pref === 'dark' || (pref === 'system' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        root.setAttribute('data-palette', palette);
+        root.setAttribute('data-mode', dark ? 'dark' : 'light');
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

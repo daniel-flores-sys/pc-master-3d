@@ -1,0 +1,213 @@
+@import "tailwindcss";
+
+/* =====================================================================
+   Tokens de color — 4 paletas × claro/oscuro.
+   Se eligen con data-palette y data-mode en <html> (ver index.html y
+   src/theme/ThemeProvider.tsx). Los componentes solo usan los tokens.
+   ===================================================================== */
+
+:root {
+  /* Fríos */
+  --ink-cold-light: #0f172a;
+  --ink-cold-dark: #f1f5f9;
+  --muted-cold-light: #475569;
+  --muted-cold-dark: #a3b3c9;
+  /* Cálidos */
+  --ink-warm-light: #1f1a14;
+  --ink-warm-dark: #f5f2eb;
+  --muted-warm-light: #5e564b;
+  --muted-warm-dark: #b9afa1;
+}
+
+/* ---------- 1. Pizarra Cobalto ---------- */
+[data-palette="cobalto"][data-mode="light"] {
+  --c-primary: #2563eb; --c-accent: #0d9488; --c-secondary: #e2e8f0;
+  --c-surface: #ffffff; --c-canvas: #f6f8fb;
+  --c-ink: var(--ink-cold-light); --c-muted: var(--muted-cold-light);
+  --c-stage: #e2e8f0; --c-stage-grid: #c3cddb;
+}
+[data-palette="cobalto"][data-mode="dark"] {
+  --c-primary: #60a5fa; --c-accent: #2dd4bf; --c-secondary: #273549;
+  --c-surface: #162032; --c-canvas: #0b1120;
+  --c-ink: var(--ink-cold-dark); --c-muted: var(--muted-cold-dark);
+  --c-stage: #0b1120; --c-stage-grid: #273549;
+}
+
+/* ---------- 2. Niebla Índigo ---------- */
+[data-palette="indigo"][data-mode="light"] {
+  --c-primary: #3b5bdb; --c-accent: #0ca678; --c-secondary: #e5e9f2;
+  --c-surface: #fdfeff; --c-canvas: #f3f5f9;
+  --c-ink: var(--ink-cold-light); --c-muted: var(--muted-cold-light);
+  --c-stage: #e5e9f2; --c-stage-grid: #c8cfdf;
+}
+[data-palette="indigo"][data-mode="dark"] {
+  --c-primary: #748ffc; --c-accent: #38d9a9; --c-secondary: #252a3a;
+  --c-surface: #1a1e2b; --c-canvas: #11141d;
+  --c-ink: var(--ink-cold-dark); --c-muted: var(--muted-cold-dark);
+  --c-stage: #11141d; --c-stage-grid: #252a3a;
+}
+
+/* ---------- 3. Papel Marfil y Zafiro ---------- */
+[data-palette="marfil"][data-mode="light"] {
+  --c-primary: #1d4ed8; --c-accent: #d97706; --c-secondary: #ece8df;
+  --c-surface: #fffdf9; --c-canvas: #f7f4ee;
+  --c-ink: var(--ink-warm-light); --c-muted: var(--muted-warm-light);
+  --c-stage: #ece8df; --c-stage-grid: #d4cdbe;
+}
+[data-palette="marfil"][data-mode="dark"] {
+  --c-primary: #6ea8fe; --c-accent: #fbbf24; --c-secondary: #2e2a24;
+  --c-surface: #221f1b; --c-canvas: #161411;
+  --c-ink: var(--ink-warm-dark); --c-muted: var(--muted-warm-dark);
+  --c-stage: #161411; --c-stage-grid: #2e2a24;
+}
+
+/* ---------- 4. Arena y Azul Petróleo ---------- */
+[data-palette="arena"][data-mode="light"] {
+  --c-primary: #0f5c78; --c-accent: #c26d3a; --c-secondary: #e9e4dc;
+  --c-surface: #fcfaf7; --c-canvas: #f4f1ea;
+  --c-ink: var(--ink-warm-light); --c-muted: var(--muted-warm-light);
+  --c-stage: #e9e4dc; --c-stage-grid: #d3cbbe;
+}
+[data-palette="arena"][data-mode="dark"] {
+  --c-primary: #4db6ac; --c-accent: #e08e5b; --c-secondary: #2c2a27;
+  --c-surface: #1f1e1c; --c-canvas: #141312;
+  --c-ink: var(--ink-warm-dark); --c-muted: var(--muted-warm-dark);
+  --c-stage: #141312; --c-stage-grid: #2c2a27;
+}
+
+/* ---------- Derivados comunes por modo ---------- */
+[data-mode="light"] {
+  color-scheme: light;
+  --c-on-primary: #ffffff;
+  --c-on-accent: var(--c-ink);
+  --c-success: #0f7a4a;
+  --c-danger: #b42318;
+  --c-accent-strong: color-mix(in oklab, var(--c-accent) 72%, black);
+}
+[data-mode="dark"] {
+  color-scheme: dark;
+  --c-on-primary: var(--c-canvas);
+  --c-on-accent: var(--c-canvas);
+  --c-success: #4ade80;
+  --c-danger: #f97066;
+  --c-accent-strong: var(--c-accent);
+}
+:root {
+  --c-line: color-mix(in oklab, var(--c-ink) 13%, transparent);
+  --c-line-strong: color-mix(in oklab, var(--c-ink) 30%, transparent);
+  --c-primary-soft: color-mix(in oklab, var(--c-primary) 12%, var(--c-surface));
+  --c-accent-soft: color-mix(in oklab, var(--c-accent) 16%, var(--c-surface));
+  --c-success-soft: color-mix(in oklab, var(--c-success) 12%, var(--c-surface));
+  --c-danger-soft: color-mix(in oklab, var(--c-danger) 11%, var(--c-surface));
+}
+
+@theme inline {
+  --color-canvas: var(--c-canvas);
+  --color-surface: var(--c-surface);
+  --color-secondary: var(--c-secondary);
+  --color-primary: var(--c-primary);
+  --color-primary-soft: var(--c-primary-soft);
+  --color-on-primary: var(--c-on-primary);
+  --color-accent: var(--c-accent);
+  --color-accent-soft: var(--c-accent-soft);
+  --color-accent-strong: var(--c-accent-strong);
+  --color-on-accent: var(--c-on-accent);
+  --color-ink: var(--c-ink);
+  --color-muted: var(--c-muted);
+  --color-line: var(--c-line);
+  --color-line-strong: var(--c-line-strong);
+  --color-success: var(--c-success);
+  --color-success-soft: var(--c-success-soft);
+  --color-danger: var(--c-danger);
+  --color-danger-soft: var(--c-danger-soft);
+  --color-stage: var(--c-stage);
+
+  --font-sans: "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", system-ui, sans-serif;
+  --font-serif: "Literata", Georgia, "Times New Roman", serif;
+}
+
+/* =====================================================================
+   Base
+   ===================================================================== */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.55;
+    background-color: var(--c-canvas);
+    color: var(--c-ink);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--c-primary) 30%, transparent);
+    color: var(--c-ink);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--c-primary);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  button {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: not-allowed;
+  }
+}
+
+/* Texto de lectura (teoría): serif, columna estrecha, interlineado amplio */
+.reading {
+  font-family: var(--font-serif);
+  font-size: 1.1875rem;
+  line-height: 1.72;
+  max-width: 64ch;
+}
+.reading p + p {
+  margin-top: 0.9em;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Relleno que se vacía mientras corre el tiempo mínimo de lectura */
+@keyframes paced-fill {
+  from { transform: scaleX(1); }
+  to { transform: scaleX(0); }
+}
+
+/* Barra de desplazamiento discreta acorde al tema */
+* {
+  scrollbar-color: var(--c-line-strong) transparent;
+  scrollbar-width: thin;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
