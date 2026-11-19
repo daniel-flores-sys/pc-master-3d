@@ -32,10 +32,7 @@ jobs:
       - name: Compilar
         run: npm run build
         env:
-          # Configúralas en Settings → Secrets and variables → Actions → Variables.
-          # La anon key es pública por diseño (el acceso lo controla RLS en InsForge).
-          VITE_INSFORGE_URL: ${{ vars.VITE_INSFORGE_URL }}
-          VITE_INSFORGE_ANON_KEY: ${{ vars.VITE_INSFORGE_ANON_KEY }}
+          # La URL y la anon key de InsForge vienen de .env.production (públicas por diseño).
           VITE_BASE: /${{ github.event.repository.name }}/
 
       - uses: actions/upload-pages-artifact@v3

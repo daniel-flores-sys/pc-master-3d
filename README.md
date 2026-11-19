@@ -51,7 +51,7 @@ npm run seed:push
 ## Publicar en GitHub Pages
 
 1. En GitHub: *Settings → Pages → Source: GitHub Actions*.
-2. En *Settings → Secrets and variables → Actions → Variables* crea `VITE_INSFORGE_URL` y `VITE_INSFORGE_ANON_KEY`.
+2. La URL y la anon key de InsForge del build están en `.env.production` (son públicas por diseño).
 3. Cada push a `main` compila y publica en `https://<usuario>.github.io/pc-master-3d/`.
 
 La URL publicada debe estar en `allowed_redirect_urls` de `insforge.toml` (`npx -y @insforge/cli config apply`).
